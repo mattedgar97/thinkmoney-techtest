@@ -19,7 +19,9 @@ var (
 func TestScan(t *testing.T) {
 	for _, scanCase := range cases {
 		checkout := Checkout{CurrentPrice: 0}
+		checkout.init()
 		for _, c := range scanCase.Case {
+			t.Logf("scanning: %s", c)
 			err := checkout.Scan(c)
 			if err != nil {
 				t.Errorf("scan error: %v", err)
