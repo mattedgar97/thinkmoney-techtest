@@ -45,8 +45,8 @@ func (c *Checkout) Scan(SKU string) (err error) {
 }
 
 // GetTotalPrice returns the current total price of all scanned items including discounts
-func (c Checkout) GetTotalPrice() (totalPrice int, err error) {
-	return c.CurrentPrice, nil
+func (c Checkout) GetTotalPrice() (totalPrice int) {
+	return c.CurrentPrice
 }
 
 func calculateTotalPrice(scannedItems map[string]int, pricing map[string]Item) int {
