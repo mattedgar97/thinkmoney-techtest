@@ -9,15 +9,14 @@ type ScanCase struct {
 	WantCurrentPrice int
 }
 
-var (
-	cases = []ScanCase{
-		{Case: []string{"A", "A", "A"}, WantCurrentPrice: 130},
-		{Case: []string{"B", "B"}, WantCurrentPrice: 45},
-	}
-)
+var scanCases = []ScanCase{
+	{Case: []string{"A", "A"}, WantCurrentPrice: 100},
+	{Case: []string{"A", "A", "A"}, WantCurrentPrice: 130},
+	{Case: []string{"B", "B"}, WantCurrentPrice: 45}, // etc
+}
 
 func TestScan(t *testing.T) {
-	for _, scanCase := range cases {
+	for _, scanCase := range scanCases {
 		checkout := Checkout{CurrentPrice: 0}
 		checkout.init()
 		for _, c := range scanCase.Case {
@@ -28,7 +27,7 @@ func TestScan(t *testing.T) {
 			}
 		}
 		if checkout.CurrentPrice != scanCase.WantCurrentPrice {
-			t.Errorf("got %v, wanted %v", checkout.CurrentPrice, scanCase.WantCurrentPrice)
+			t.Errorf("failed: got %v, wanted %v", checkout.CurrentPrice, scanCase.WantCurrentPrice)
 		}
 	}
 
